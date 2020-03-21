@@ -10,29 +10,33 @@ public class ProductionLine implements Runnable{
 	private Queue<Aircraft> InProduction;
 	private Queue<Aircraft> WaitingProduction;
 
-	public ProductionLine(int maxplanes){
+	public ProductionLine(int maxplanes,Queue<Aircraft> WaitingProduction){
 		this.IncomingPlanes = maxplanes;
 		this.InProduction = new LinkedList<Aircraft>();
-		this.WaitingProduction = new LinkedList<Aircraft>();
+		this.WaitingProduction = WaitingProduction;
 	}
 
+	public synchronized void PutIntoProduction(){
+		while(true){
 
+			
+		}
+
+	}
 
 	@Override 
 	public void run(){
 		System.out.println("Thread Pool Started");
-		ExecutorService pool = Executors.newFixedThreadPool(10);
+		//ExecutorService pool = Executors.newFixedThreadPool(10);
 
 
-		System.out.println("AircraftControllor Start");
-		AircraftControllor controllor = new AircraftControllor();
 
 
-		Queue<Robot> rbots = new LinkedList<Robot>();
-    	for(int j = 0; j<10; j++){
-        	Thread robot = new Thread(new Robot(j));
-        	robot.start(); 
-    	}
+		//Queue<Robot> rbots = new LinkedList<Robot>();
+    	//for(int j = 0; j<10; j++){
+        //	Thread robot = new Thread(new Robot(j));
+        //	robot.start(); 
+    	//}
    	 
 
 	}

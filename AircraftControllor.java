@@ -6,11 +6,13 @@ import Ca4006.*;
 public class AircraftControllor implements Runnable {
 	private Queue<Aircraft> AircraftsWaitingForParts;
 	private Storage PartStorage;
+	private Queue<Aircraft> WaitingProduction;
 
-	public AircraftControllor(){
+	public AircraftControllor(Queue<Aircraft> WaitingProduction){
 
 		this.AircraftsWaitingForParts = new LinkedList<Aircraft>();
 		this.PartStorage = new Storage();
+		this.WaitingProduction = WaitingProduction;
 	}
 
 	public Aircraft GenerateAircraft(int id){
@@ -48,8 +50,8 @@ public class AircraftControllor implements Runnable {
 		return -1;
 	}
 
-	public synchronized void ReadyForProduction(){
-
+	public synchronized void ReadyForProduction (Aircraft productionReady) {
+			WaitingProduction.add(productionReady);
 	}
 
 
@@ -57,16 +59,23 @@ public class AircraftControllor implements Runnable {
 	public void run(){
 		int aircraftCount = 0;
 		while(aircraftCount <= 10 || !AircraftsWaitingForParts.isEmpty()){
+			
+			if(aircraftCount <= 10 ){
+				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
+				if(CheckParts(arrivedAircraft.getAricraftWorkPlan())){
+					System.out.println("ready for production");
+					ReadyForProduction(arrivedAircraft); //ready for production
 
-			Aircraft arrivedAircraft = GenerateAircraft(aircraftCount);
-			if(CheckParts(arrivedAircraft.getAricraftWorkPlan())){
-				//ready for production
+				}
+				else{
+					AircraftsWaitingForParts.add(arrivedAircraft);// add to waiting list
+				}
+				// thread.sleep();  
+				aircraftCount++;
+			}else if (!AircraftsWaitingForParts.isEmpty()){
+				// use poll for queue // check queue
 			}
-			else{
-				// add to waiting list
-			}
-			// thread.sleep();  
-			aircraftCount++;
+
 
 		}
 
