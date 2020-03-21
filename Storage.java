@@ -24,7 +24,10 @@ public class Storage{
 		return storageList;
 	}
 
-	
+	public List<Part> GetStorageList(){
+		return StorageList;
+	}
+
 
 
 }

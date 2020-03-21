@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.Random;   
 import Ca4006.Part;
 
-public class Aircraft implements Runnable {
+public class Aircraft {
 	private Integer AircraftID;
 	private Integer ArrivalTime;
-	private Queue<Part> WorkPlan;
+	private List<Part> WorkPlan;
 	private boolean ReadyForProduction;
 
 	public Aircraft(Integer id){
@@ -25,13 +25,13 @@ public class Aircraft implements Runnable {
 		return ArrivalTime;
 	}
 
-	public Queue<Part> getAricraftWorkPlan(){
+	public List<Part> getAricraftWorkPlan(){
 		return WorkPlan;
 	}
 
-	public Queue<Part> GenerateWorkPlan(){
+	public List<Part> GenerateWorkPlan(){
 		Random rand = new Random();
-		Queue<Part> workplan = new LinkedList<Part>();
+		List<Part> workplan = new ArrayList<Part>();
 		
 		for(int i = 0; i <= rand.nextInt(5); i++ ){ // adds random amount of parts
 			Part newPart = new Part(rand.nextInt(3)); // picks random part
@@ -40,13 +40,5 @@ public class Aircraft implements Runnable {
 		return workplan;
 	}
 
-	public void print(){
-		System.out.println("ID: " + AircraftID + " WorkPlan: " + WorkPlan);
-	}
 
-	@Override
-	public void run(){
-		System.out.println("Aircraft: " + AircraftID);
-		this.print();
-	}
 }

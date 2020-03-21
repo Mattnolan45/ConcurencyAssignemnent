@@ -1,6 +1,9 @@
 package Ca4006;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.*;  
+import Ca4006.*;
 
 public class ProductionLine implements Runnable{
 	private int IncomingPlanes;
@@ -14,14 +17,24 @@ public class ProductionLine implements Runnable{
 	}
 
 
+
 	@Override 
 	public void run(){
-		int i = 0;
-		System.out.println("ProductionLine Start");
-		while( i < IncomingPlanes){
-			// do stuff
-			i++
-		}
+		System.out.println("Thread Pool Started");
+		ExecutorService pool = Executors.newFixedThreadPool(10);
+
+
+		System.out.println("AircraftControllor Start");
+		AircraftControllor controllor = new AircraftControllor();
+
+
+		Queue<Robot> rbots = new LinkedList<Robot>();
+    	for(int j = 0; j<10; j++){
+        	Thread robot = new Thread(new Robot(j));
+        	robot.start(); 
+    	}
+   	 
+
 	}
 
 }
