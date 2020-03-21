@@ -7,9 +7,7 @@ public class Storage{
 	private List<Part> StorageList;
 
 	public Storage(){
-		this.Storage = GenerateStorageList();
-
-
+		this.StorageList = GenerateStorageList();
 	}
 
 	public List<Part> GenerateStorageList(){
@@ -19,13 +17,14 @@ public class Storage{
 		{
 			for(int j = 0;j<=2; j++)
 			{
-				Part newPart = new Part(i); // picks random part
+				Part newPart = new Part(i);
 				storageList.add(newPart);
 			}
 		}
 		return storageList;
-
 	}
+
+	
 
 
 }
