@@ -6,13 +6,12 @@ import Ca4006.*;
 public class AircraftControllor implements Runnable {
 	private Queue<Aircraft> AircraftsWaitingForParts;
 	private Storage PartStorage;
-	private Queue<Aircraft> WaitingProduction;
-
-	public AircraftControllor(Queue<Aircraft> WaitingProduction){
+	
+	public AircraftControllor(){
 
 		this.AircraftsWaitingForParts = new LinkedList<Aircraft>();
 		this.PartStorage = new Storage();
-		this.WaitingProduction = WaitingProduction;
+
 	}
 
 	public Aircraft GenerateAircraft(int id){
@@ -51,7 +50,7 @@ public class AircraftControllor implements Runnable {
 	}
 
 	public synchronized void ReadyForProduction (Aircraft productionReady) {
-			WaitingProduction.add(productionReady);
+			
 	}
 
 
@@ -65,7 +64,7 @@ public class AircraftControllor implements Runnable {
 				if(CheckParts(arrivedAircraft.getAricraftWorkPlan())){
 					System.out.println("ready for production");
 					ReadyForProduction(arrivedAircraft); //ready for production
-
+					//notify production line
 				}
 				else{
 					AircraftsWaitingForParts.add(arrivedAircraft);// add to waiting list

@@ -11,13 +11,11 @@ public class Main{
     Queue<Aircraft> WaitingProduction = new LinkedList<Aircraft>();
 
     System.out.println("ProductionLine Start");
-    Thread productionLine = new Thread( new ProductionLine(10, WaitingProduction) );
+    Thread productionLine = new Thread( new ProductionLine(10) );
     productionLine.start();
 
 
-    System.out.println("AircraftControllor Start");
-    Thread controllor = new Thread(new AircraftControllor(WaitingProduction));
-    controllor.start();
+
   }
 
 }

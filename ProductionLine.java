@@ -10,35 +10,40 @@ public class ProductionLine implements Runnable{
 	private Queue<Aircraft> InProduction;
 	private Queue<Aircraft> WaitingProduction;
 
-	public ProductionLine(int maxplanes,Queue<Aircraft> WaitingProduction){
+	public ProductionLine(int maxplanes){
 		this.IncomingPlanes = maxplanes;
 		this.InProduction = new LinkedList<Aircraft>();
-		this.WaitingProduction = WaitingProduction;
+		this.WaitingProduction = new LinkedList<Aircraft>();
 	}
 
-	public synchronized void PutIntoProduction(){
-		while(true){
-
-			
+	public synchronized void PutIntoProduction(Aircraft goToProduction){
+		if(InProduction.size() < 3){
+			InProduction.add(goToProduction);
 		}
-
 	}
+
+	
 
 	@Override 
 	public void run(){
+
+		System.out.println("AircraftControllor Start");
+    	Thread controllor = new Thread(new AircraftControllor());
+    	controllor.start();
+		synchronized(controllor){
+			try{
+				controllor.wait();
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
+
+		}
+
 		System.out.println("Thread Pool Started");
-		//ExecutorService pool = Executors.newFixedThreadPool(10);
-
-
-
-
-		//Queue<Robot> rbots = new LinkedList<Robot>();
-    	//for(int j = 0; j<10; j++){
-        //	Thread robot = new Thread(new Robot(j));
-        //	robot.start(); 
-    	//}
-   	 
-
+		//ExecutorService pool = Executors.newFixedThreadPool(10); // starts thread pool
+		while(true){
+			//check waiting in production
+			//do production
+		}
 	}
-
 }
