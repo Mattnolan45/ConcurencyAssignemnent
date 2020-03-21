@@ -1,6 +1,6 @@
- package Ca4006;
+package Ca4006;
 
-public class Robot {
+public class Robot implements Runnable {
 	
 	private Integer RobotID;
 	private Integer Capacity;
@@ -22,5 +22,10 @@ public class Robot {
 
 	public Integer GetRobotCurrentParts(){
 		return CurrentParts;
+	}
+
+	@Override
+	public void run(){
+		System.out.println("RobotID: "+ RobotID);
 	}
 }
