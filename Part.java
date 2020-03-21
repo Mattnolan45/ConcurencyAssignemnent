@@ -1,6 +1,7 @@
 package Ca4006;	
 
 public class Part{
+	
 	private int PartID;
 	private int InstallTime;
 
