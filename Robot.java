@@ -1,5 +1,9 @@
 package Ca4006;
 
+
+import java.util.Arrays;
+import java.util.logging.Logger;
+
 public class Robot implements Runnable {
 	
 	private Integer RobotID;
@@ -24,8 +28,28 @@ public class Robot implements Runnable {
 		return CurrentParts;
 	}
 
-	@Override
-	public void run(){
+	public void print_info()
+	{
+		System.out.println("Robot" + GetRobotID() + "in Thread" + Thread.currentThread().getName() + " is working on Aircraft CHANGE TO PUT DYNAMIC NUMBER HERE and will take AMOUNT OF TIME HERE");
+	}
 
+	public synchronized void do_install() throws InterruptedException
+	{
+	
+	}
+
+	@Override
+	public void run()
+	{
+		print_info();
+
+		try
+		{
+			do_install();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
