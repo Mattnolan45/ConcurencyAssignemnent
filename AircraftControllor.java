@@ -21,22 +21,30 @@ public class AircraftControllor implements Runnable {
 		return newAircraft;
 	}
 
-	public boolean CheckParts(List<Part> aircraftWorkPlan){
+	public synchronized boolean CheckParts(List<Part> aircraftWorkPlan){
 		List<Part> storageCopy = PartStorage.GetStorageList();
-		System.out.println(storageCopy);
+		System.out.println("work: "+ aircraftWorkPlan);
 		for(Part p : aircraftWorkPlan){
-			System.out.println(p.GetPartID());
+			
 			for(Part storedPart : storageCopy){
-				System.out.println(storedPart.GetPartID());
+				System.out.println("storedPart "+ storedPart.GetPartID());
+				System.out.println("storageCopy "+ storageCopy);
 				if(storedPart.GetPartID() == p.GetPartID()){
-					System.out.println("removing");
-					storageCopy.remove(FindIndexInStorage(storageCopy, storedPart));
+					try{
+						int index = FindIndexInStorage(storageCopy, storedPart);
+						storageCopy.remove(storageCopy.get(index));	
+						System.out.println("Removed: "+ index);
+					}catch(Exception e){
+						return false;
+					}
+					
 				}
 				else{
 					return false; // not all parts found
 				}
 			}
 		}
+		System.out.println("prnt true");
 		return true; // all parts found
 	}
 
@@ -46,7 +54,7 @@ public class AircraftControllor implements Runnable {
 			while(i < parts.size()){
 				System.out.println(parts.get(i).GetPartID());
 				if(parts.get(i).GetPartID() == part.GetPartID()){
-					System.out.println("returned: "+ i);
+	
 					return i;
 				}
 				else{
@@ -63,10 +71,9 @@ public class AircraftControllor implements Runnable {
 	@Override
 	public void run(){
 		int aircraftCount = 0;
-		while(aircraftCount <= 10 ){//|| !AircraftsWaitingForParts.isEmpty()){
+		while(aircraftCount <= 5 ){//|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
 			System.out.println("producing aircraft");
 			if(aircraftCount <= 10 ){
-				System.out.println("make");
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
 				
 				if(CheckParts(arrivedAircraft.getAricraftWorkPlan())){

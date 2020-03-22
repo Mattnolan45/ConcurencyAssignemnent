@@ -33,7 +33,7 @@ public class Aircraft {
 		Random rand = new Random();
 		List<Part> workplan = new ArrayList<Part>();
 		
-		for(int i = 0; i <= rand.nextInt(5); i++ ){ // adds random amount of parts
+		for(int i = 0; i <= rand.nextInt((5-1)+1); i++ ){ // adds random amount of parts
 			Part newPart = new Part(rand.nextInt(3)); // picks random part
 			workplan.add(newPart);
 		}
