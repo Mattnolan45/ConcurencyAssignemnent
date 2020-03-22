@@ -6,11 +6,13 @@ import Ca4006.*;
 public class AircraftControllor implements Runnable {
 	private Queue<Aircraft> AircraftsWaitingForParts;
 	private Storage PartStorage;
+	private AircraftWaitingList WaitingProduction;
 	
-	public AircraftControllor(){
+	public AircraftControllor(AircraftWaitingList waitingProduction){
 
 		this.AircraftsWaitingForParts = new LinkedList<Aircraft>();
 		this.PartStorage = new Storage();
+		this.WaitingProduction = waitingProduction;
 
 	}
 
@@ -21,9 +23,13 @@ public class AircraftControllor implements Runnable {
 
 	public boolean CheckParts(List<Part> aircraftWorkPlan){
 		List<Part> storageCopy = PartStorage.GetStorageList();
+		System.out.println(storageCopy);
 		for(Part p : aircraftWorkPlan){
+			System.out.println(p.GetPartID());
 			for(Part storedPart : storageCopy){
-				if(storedPart == p){
+				System.out.println(storedPart.GetPartID());
+				if(storedPart.GetPartID() == p.GetPartID()){
+					System.out.println("removing");
 					storageCopy.remove(FindIndexInStorage(storageCopy, storedPart));
 				}
 				else{
@@ -38,7 +44,9 @@ public class AircraftControllor implements Runnable {
 		if(parts != null){
 			int i = 0;
 			while(i < parts.size()){
-				if(parts.get(i) == part ){
+				System.out.println(parts.get(i).GetPartID());
+				if(parts.get(i).GetPartID() == part.GetPartID()){
+					System.out.println("returned: "+ i);
 					return i;
 				}
 				else{
@@ -49,27 +57,27 @@ public class AircraftControllor implements Runnable {
 		return -1;
 	}
 
-	public synchronized void ReadyForProduction (Aircraft productionReady) {
-			
-	}
+
 
 
 	@Override
 	public void run(){
 		int aircraftCount = 0;
-		while(aircraftCount <= 10 || !AircraftsWaitingForParts.isEmpty()){
-			
+		while(aircraftCount <= 10 ){//|| !AircraftsWaitingForParts.isEmpty()){
+			System.out.println("producing aircraft");
 			if(aircraftCount <= 10 ){
+				System.out.println("make");
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
+				
 				if(CheckParts(arrivedAircraft.getAricraftWorkPlan())){
 					System.out.println("ready for production");
-					ReadyForProduction(arrivedAircraft); //ready for production
-					//notify production line
+					WaitingProduction.PutIntoProduction(arrivedAircraft); //notify production line
 				}
 				else{
 					AircraftsWaitingForParts.add(arrivedAircraft);// add to waiting list
 				}
-				// thread.sleep();  
+
+				// thread.sleep(random);  
 				aircraftCount++;
 			}else if (!AircraftsWaitingForParts.isEmpty()){
 				// use poll for queue // check queue

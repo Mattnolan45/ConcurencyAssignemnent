@@ -10,10 +10,15 @@ public class Main{
 
     Queue<Aircraft> WaitingProduction = new LinkedList<Aircraft>();
 
+    AircraftWaitingList waitingList = new AircraftWaitingList();
+
     System.out.println("ProductionLine Start");
-    Thread productionLine = new Thread( new ProductionLine(10) );
+    Thread productionLine = new Thread( new ProductionLine(10, waitingList) );
     productionLine.start();
 
+    System.out.println("AircraftControllor Start");
+    Thread controllor = new Thread( new AircraftControllor(waitingList) );
+    controllor.start();
 
 
   }
