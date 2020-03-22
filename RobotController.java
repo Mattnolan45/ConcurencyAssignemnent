@@ -28,11 +28,14 @@ public class RobotController implements Runnable{
 
 	public void assignAndStartRobotJob(Robot robot, Aircraft aircraft){
 		robot.SetRobotCurrentWorkPlan(aircraft.getAricraftWorkPlan());
+		robot.SetAircraftID(aircraft.getAircraftId());
 		System.out.println("Ready To start robot: " + robot.GetRobotID()+ " working on Aircraft: " + aircraft.getAircraftId());
 		System.out.println();
 
 		ThreadPool.execute(robot); 
 	}
+
+
 
 	@Override
 	public void run(){

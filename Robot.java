@@ -56,6 +56,11 @@ public class Robot implements Runnable {
 
 	}
 
+	public void SetAircraftID(int AirID)
+	{
+		AircraftID = AirID;
+	}
+
 	@Override
 	public void run()
 	{
