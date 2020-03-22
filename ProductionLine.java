@@ -28,10 +28,20 @@ public class ProductionLine implements Runnable{
 		while(true){
 			if(InProduction.size() < 3){
 				Aircraft readyAircraft = WaitingProduction.GetFromContollor(); 
-				readyAircraft.print();	
-			}
+				readyAircraft.print();
+				System.out.println("Sending Aircraft: "+readyAircraft.getAircraftId()+" into ProductionLine");
+				InProduction.add(readyAircraft);
+				System.out.println();
 
-			
+				// add robots	
+			}
+			System.out.println("WaitingProductionSize: " + WaitingProduction.size());
+			try{
+				Thread.sleep(1000);
+			}
+			catch(Exception e ){
+				System.out.println(e);
+			}
 			//check waiting in production
 			//do production
 		}

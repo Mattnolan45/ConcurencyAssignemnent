@@ -29,5 +29,10 @@ public class AircraftWaitingList{
 
 		}	
 	}
+
+	public int size(){
+		return WaitingList.size();
+	}
+
 }
 
