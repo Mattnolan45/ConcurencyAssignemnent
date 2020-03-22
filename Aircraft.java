@@ -8,12 +8,13 @@ public class Aircraft {
 	private Integer AircraftID;
 	private Integer ArrivalTime;
 	private List<Part> WorkPlan;
-	
+	private boolean WorkedOn;
 
 	public Aircraft(Integer id){
 		this.AircraftID = id; 
 		this.ArrivalTime = 0; //  not sure if needed
 		this.WorkPlan = GenerateWorkPlan();
+		this.WorkedOn = false;
 	}
 
 	public Integer getAircraftId(){
@@ -26,6 +27,19 @@ public class Aircraft {
 
 	public List<Part> getAricraftWorkPlan(){
 		return WorkPlan;
+	}
+
+	public boolean getWorkedOn(){
+		return WorkedOn;
+	}
+
+	public void UpdateWorkedOn(){
+		if(WorkedOn == false){
+			WorkedOn = true;
+		}
+		else{
+			WorkedOn = false;
+		}
 	}
 
 	public List<Part> GenerateWorkPlan(){

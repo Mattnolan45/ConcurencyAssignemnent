@@ -32,11 +32,13 @@ public class AircraftController implements Runnable {
 		while(aircraftCount < 5 ){ //|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
 			System.out.println("producing aircraft Number: " + aircraftCount);
 			if(aircraftCount < 5 ){
+
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
 				WaitingProduction.PutIntoProduction(arrivedAircraft);
 				System.out.println("AircraftController Sleep");
+				
 				try{
-				Thread.sleep(2000);
+					Thread.sleep(2000);
 				}catch(Exception e){
 					System.out.println(e);
 				}

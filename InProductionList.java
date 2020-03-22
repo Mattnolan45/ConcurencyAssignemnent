@@ -11,14 +11,12 @@ public class InProductionList{
 		this.InProductionList = new LinkedList<Aircraft>();
 	}
 
-	public synchronized Aircraft RemoveFromProductionLine(){
+	public synchronized void WaitForProductionLine(){
 		try { 
 			wait();
 		} catch (Exception e) {
 
 		}
-		
-		return InProductionList.poll();
 	}
 
 	public synchronized void PutIntoProductionList(Aircraft aircraft){
@@ -29,6 +27,17 @@ public class InProductionList{
 
 		}	
 	}
+
+	public Aircraft CheckForOpenAircraft(){
+		for(Aircraft a : InProductionList){
+			if(a.getWorkedOn() == false){
+				a.UpdateWorkedOn();
+				return a;
+			}
+		}
+		return null ;
+	}
+
 
 	public int size(){
 		return InProductionList.size();

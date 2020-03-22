@@ -10,9 +10,9 @@ public class ProductionLine implements Runnable{
 	private InProductionList InProduction;
 	private AircraftWaitingList WaitingProduction;
 
-	public ProductionLine(int maxplanes, AircraftWaitingList waitingProduction){
+	public ProductionLine(int maxplanes, AircraftWaitingList waitingProduction,InProductionList inProductionList ){
 		this.IncomingPlanes = maxplanes;
-		this.InProduction = new InProductionList();
+		this.InProduction = inProductionList;
 		this.WaitingProduction = waitingProduction;
 	}
 
@@ -24,8 +24,7 @@ public class ProductionLine implements Runnable{
 	public void run(){
 
 
-		System.out.println("Thread Pool Started");
-		//ExecutorService pool = Executors.newFixedThreadPool(10); // starts thread pool
+		
 		while(true){
 			if(InProduction.size() < 3){
 				

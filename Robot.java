@@ -7,6 +7,7 @@ import java.util.*;
 public class Robot implements Runnable {
 	
 	private Integer RobotID;
+	private Integer AircraftID;
 	private Queue<Part> CurrentWorkPlan;
 
 	public Robot(Integer id, Queue<Part> part ){
