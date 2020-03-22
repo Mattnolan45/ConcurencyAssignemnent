@@ -1,7 +1,6 @@
 package Ca4006;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 import java.util.*;  
 import Ca4006.*;
 
@@ -26,7 +25,7 @@ public class ProductionLine implements Runnable{
 
 		
 		while(true){
-			if(InProduction.size() < 3){
+			if(InProduction.size() <= 3){
 				
 				Aircraft readyAircraft = WaitingProduction.GetFromAircraftContollor(); 
 				readyAircraft.print();

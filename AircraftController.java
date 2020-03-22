@@ -22,16 +22,12 @@ public class AircraftController implements Runnable {
 	}
 
 
-
-
-
-
 	@Override
 	public void run(){
 		int aircraftCount = 0;
-		while(aircraftCount < 5 ){ //|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
-			System.out.println("producing aircraft Number: " + aircraftCount);
-			if(aircraftCount < 5 ){
+		while(aircraftCount <= 5 ){ //|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
+			System.out.println("Making aircraft Number: " + aircraftCount);
+			if(aircraftCount <= 5 ){
 
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
 				WaitingProduction.PutIntoProduction(arrivedAircraft);

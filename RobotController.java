@@ -8,6 +8,7 @@ import Ca4006.*;
 public class RobotController implements Runnable{
 	private Queue<Robot> waitingRobots;
 	private InProductionList InProduction;
+	private ExecutorService ThreadPool;
 
 
 	public RobotController(InProductionList inProductionList){
@@ -16,7 +17,7 @@ public class RobotController implements Runnable{
 	}
 
 	public void GenerateRobots(){
-		Queue<Part> partsToBeInstalled = new LinkedList<Part>();  
+		List<Part> partsToBeInstalled = new ArrayList<Part>();  
 
 		for(int i = 0; i < 5; i++){
 			Robot newRobot = new Robot(i,partsToBeInstalled);
@@ -25,8 +26,12 @@ public class RobotController implements Runnable{
 
 	}
 
-	public void assignRobotJob(Robot robot, Aircraft aircraft){
+	public void assignAndStartRobotJob(Robot robot, Aircraft aircraft){
+		robot.SetRobotCurrentWorkPlan(aircraft.getAricraftWorkPlan());
+		System.out.println("Ready To start robot: " + robot.GetRobotID()+ " working on Aircraft: " + aircraft.getAircraftId());
+		System.out.println();
 
+		ThreadPool.execute(robot); 
 	}
 
 	@Override
@@ -36,7 +41,7 @@ public class RobotController implements Runnable{
 		System.out.println();
 
 		System.out.println("Thread Pool Started");
-		ExecutorService pool = Executors.newFixedThreadPool(3); // starts thread pool
+		ThreadPool = Executors.newFixedThreadPool(3); // starts thread pool
 		System.out.println();
 
 		while(true){
@@ -44,9 +49,9 @@ public class RobotController implements Runnable{
 			if(InProduction.size() > 1){
 				Aircraft openAircraft = InProduction.CheckForOpenAircraft();
 				if(openAircraft != null){
+					
 					Robot currentRobot = waitingRobots.poll();
-					System.out.println("Ready To start robot: " + currentRobot.GetRobotID() );
-					System.out.println();
+					assignAndStartRobotJob(currentRobot, openAircraft);
 					// assign to robot
 					//
 				}
