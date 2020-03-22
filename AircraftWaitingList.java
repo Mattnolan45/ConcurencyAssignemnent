@@ -4,14 +4,14 @@ import java.util.*;
 import Ca4006.*;
 
 public class AircraftWaitingList{
-	private Queue<Aircraft> WaitingList;
+	private 	Queue<Aircraft> WaitingList; // shared resource
 
 
 	public AircraftWaitingList(){
 		this.WaitingList = new LinkedList<Aircraft>();
 	}
 
-	public synchronized Aircraft GetFromContollor(){
+	public synchronized Aircraft GetFromAircraftContollor(){ // removing from queue
 		try { 
 			wait();
 		} catch (Exception e) {
@@ -21,7 +21,7 @@ public class AircraftWaitingList{
 		return WaitingList.poll();
 	}
 
-	public synchronized void PutIntoProduction(Aircraft aircraft){
+	public synchronized void PutIntoProduction(Aircraft aircraft){ // adding to queue
 		try{
 			WaitingList.add(aircraft);
 			notify();

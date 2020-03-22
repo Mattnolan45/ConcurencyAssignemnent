@@ -1,31 +1,26 @@
 package Ca4006;
 
+import Ca4006.*;
+import java.util.*;
 
-import java.util.Arrays;
-import java.util.logging.Logger;
 
 public class Robot implements Runnable {
 	
 	private Integer RobotID;
-	private Integer Capacity;
-	private Integer CurrentParts;
+	private Queue<Part> CurrentWorkPlan;
 
-	public Robot(Integer id){
+	public Robot(Integer id, Part part ){
 		this.RobotID = id;
-		this.Capacity = 0;
-		this.CurrentParts = 0;
+		this.CurrentWorkPlan = new LinkedList<Part>();
 	}
 
 	public Integer GetRobotID(){
 		return RobotID;
 	}
 
-	public Integer GetRobotCapacity(){
-		return Capacity;
-	}
-
-	public Integer GetRobotCurrentParts(){
-		return CurrentParts;
+	
+	public Queue<Part> GetRobotCurrentParts(){
+		return CurrentWorkPlan;
 	}
 
 	public void print_info()

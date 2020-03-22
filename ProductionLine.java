@@ -16,6 +16,7 @@ public class ProductionLine implements Runnable{
 		this.WaitingProduction = waitingProduction;
 	}
 
+	
 
 	
 
@@ -27,10 +28,13 @@ public class ProductionLine implements Runnable{
 		//ExecutorService pool = Executors.newFixedThreadPool(10); // starts thread pool
 		while(true){
 			if(InProduction.size() < 3){
-				Aircraft readyAircraft = WaitingProduction.GetFromContollor(); 
+				
+				Aircraft readyAircraft = WaitingProduction.GetFromAircraftContollor(); 
 				readyAircraft.print();
+				
 				System.out.println("Sending Aircraft: "+readyAircraft.getAircraftId()+" into ProductionLine");
 				InProduction.add(readyAircraft);
+				
 				System.out.println();
 
 				// add robots	

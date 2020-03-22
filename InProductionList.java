@@ -3,11 +3,11 @@ package Ca4006;
 import java.util.*;  
 import Ca4006.*;
 
-public class InProductionWaitingList{
+public class InProductionList{
 	private Queue<Aircraft> InProductionList;
 
 
-	public AircraftWaitingList(){
+	public InProductionList(){
 		this.InProductionList = new LinkedList<Aircraft>();
 	}
 
@@ -18,12 +18,12 @@ public class InProductionWaitingList{
 
 		}
 		
-		return WaitingList.poll();
+		return InProductionList.poll();
 	}
 
 	public synchronized void PutIntoProduction(Aircraft aircraft){
 		try{
-			WaitingList.add(aircraft);
+			InProductionList.add(aircraft);
 			notify();
 		} catch( Exception e){
 
@@ -31,7 +31,7 @@ public class InProductionWaitingList{
 	}
 
 	public int size(){
-		return WaitingList.size();
+		return InProductionList.size();
 	}
 
 }
