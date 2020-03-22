@@ -55,6 +55,7 @@ public class Aircraft {
 
 	public void print(){
 		System.out.println("AircraftID: " + AircraftID);
+		System.out.println();
 	}
 
 }

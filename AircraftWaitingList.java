@@ -4,7 +4,7 @@ import java.util.*;
 import Ca4006.*;
 
 public class AircraftWaitingList{
-	private 	Queue<Aircraft> WaitingList; // shared resource
+	private Queue<Aircraft> WaitingList; // shared resource
 
 
 	public AircraftWaitingList(){

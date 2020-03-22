@@ -7,6 +7,7 @@ public class AircraftController implements Runnable {
 	private Queue<Aircraft> AircraftsWaitingForParts;
 	private Storage PartStorage;
 	private AircraftWaitingList WaitingProduction;
+
 	
 	public AircraftController(AircraftWaitingList waitingProduction){
 
@@ -24,14 +25,17 @@ public class AircraftController implements Runnable {
 
 	@Override
 	public void run(){
-		int aircraftCount = 0;
-		while(aircraftCount <= 5 ){ //|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
+		int aircraftCount = 1;
+		while(aircraftCount <= 6  ){ 
 			System.out.println("Making aircraft Number: " + aircraftCount);
-			if(aircraftCount <= 5 ){
+			System.out.println();
+			if(aircraftCount <= 6 ){
 
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
-				WaitingProduction.PutIntoProduction(arrivedAircraft);
+				WaitingProduction.PutIntoProduction(arrivedAircraft); // put into shared waiting production list
+				
 				System.out.println("AircraftController Sleep");
+				System.out.println();
 				
 				try{
 					Thread.sleep(2000);
@@ -41,7 +45,8 @@ public class AircraftController implements Runnable {
 			}
 			aircraftCount++;
 		}
-		System.out.println("AircraftController closed");
+		System.out.println("AircraftController closed"); // all aircrafts have been made and added into the waiting list
+		System.out.println();
 
 	}
 

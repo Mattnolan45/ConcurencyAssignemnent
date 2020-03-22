@@ -15,17 +15,9 @@ public class ProductionLine implements Runnable{
 		this.WaitingProduction = waitingProduction;
 	}
 
-
-
-	
-
-	@Override 
-	public void run(){
-
-
-		
-		while(true){
-			if(InProduction.size() <= 3){
+	public void CheckForSpaceInProductionLine(){
+		System.out.println("Production size: "+InProduction.size());
+		if(InProduction.size() <= 3){
 				
 				Aircraft readyAircraft = WaitingProduction.GetFromAircraftContollor(); 
 				readyAircraft.print();
@@ -34,18 +26,26 @@ public class ProductionLine implements Runnable{
 				InProduction.PutIntoProductionList(readyAircraft);
 				
 				System.out.println();
+		}
+	}
 
-				// add robots	
-			}
-			System.out.println("WaitingProductionSize: " + WaitingProduction.size());
+	
+
+	@Override 
+	public void run(){	
+		while(true){
+			CheckForSpaceInProductionLine();
+
+			System.out.println("Aircrafts Waiting to go to InProduction: " + WaitingProduction.size());
+			System.out.println();
 			try{
 				Thread.sleep(1000);
 			}
 			catch(Exception e ){
 				System.out.println(e);
 			}
-			//check waiting in production
-			//do production
 		}
+
+
 	}
 }
