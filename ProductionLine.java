@@ -26,7 +26,12 @@ public class ProductionLine implements Runnable{
 		System.out.println("Thread Pool Started");
 		//ExecutorService pool = Executors.newFixedThreadPool(10); // starts thread pool
 		while(true){
-			System.out.println(WaitingProduction.GetFromContollor());
+			if(InProduction.size() < 3){
+				Aircraft readyAircraft = WaitingProduction.GetFromContollor(); 
+				readyAircraft.print();	
+			}
+
+			
 			//check waiting in production
 			//do production
 		}

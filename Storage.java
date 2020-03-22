@@ -35,4 +35,53 @@ public class Storage{
 			System.out.println(StorageList.get(i).GetPartID());
 		}
 	}
+
+	public synchronized boolean CheckParts(List<Part> aircraftWorkPlan){
+
+		for(Part p : aircraftWorkPlan){
+			
+			for(Part storedPart : StorageList){
+				
+				if(storedPart.GetPartID() == p.GetPartID()){
+					try{
+						int index = FindIndexInStorage(StorageList, storedPart);
+						StorageList.remove(StorageList.get(index));	
+						
+					}catch(Exception e){
+						return false;
+					}
+					
+				}
+				else{
+					return false; // not all parts found
+				}
+			}
+		}
+		System.out.println("prnt true");
+		return true; // all parts found
+	}
+
+	public synchronized void AddToStorageList(){
+		
+	}
+
+
+
+
+	public int FindIndexInStorage(List<Part> parts, Part part){
+		if(parts != null){
+			int i = 0;
+			while(i < parts.size()){
+				System.out.println(parts.get(i).GetPartID());
+				if(parts.get(i).GetPartID() == part.GetPartID()){
+	
+					return i;
+				}
+				else{
+					i++;
+				}
+			}
+		}
+		return -1;
+	}
 }

@@ -8,13 +8,12 @@ public class Aircraft {
 	private Integer AircraftID;
 	private Integer ArrivalTime;
 	private List<Part> WorkPlan;
-	private boolean ReadyForProduction;
+	
 
 	public Aircraft(Integer id){
 		this.AircraftID = id; 
 		this.ArrivalTime = 0; //  not sure if needed
 		this.WorkPlan = GenerateWorkPlan();
-		this.ReadyForProduction = false;
 	}
 
 	public Integer getAircraftId(){
@@ -33,12 +32,15 @@ public class Aircraft {
 		Random rand = new Random();
 		List<Part> workplan = new ArrayList<Part>();
 		
-		for(int i = 0; i <= rand.nextInt((5-1)+1); i++ ){ // adds random amount of parts
+		for(int i = 0; i <= rand.nextInt((5-1)+1); i++ ){ // adds random amount of parts > 0 parts
 			Part newPart = new Part(rand.nextInt(3)); // picks random part
 			workplan.add(newPart);
 		}
 		return workplan;
 	}
 
+	public void print(){
+		System.out.println("AircraftID: " + AircraftID);
+	}
 
 }
