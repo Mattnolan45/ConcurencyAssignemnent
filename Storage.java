@@ -28,6 +28,11 @@ public class Storage{
 		return StorageList;
 	}
 
-
-
+	public void print_storage()
+	{
+		for(int i = 0; i < StorageList.size(); i++)
+		{
+			System.out.println(StorageList.get(i).GetPartID());
+		}
+	}
 }
