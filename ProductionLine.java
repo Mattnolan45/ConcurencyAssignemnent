@@ -7,16 +7,16 @@ import Ca4006.*;
 
 public class ProductionLine implements Runnable{
 	private int IncomingPlanes;
-	private Queue<Aircraft> InProduction;
+	private InProductionList InProduction;
 	private AircraftWaitingList WaitingProduction;
 
 	public ProductionLine(int maxplanes, AircraftWaitingList waitingProduction){
 		this.IncomingPlanes = maxplanes;
-		this.InProduction = new LinkedList<Aircraft>();
+		this.InProduction = new InProductionList();
 		this.WaitingProduction = waitingProduction;
 	}
 
-	
+
 
 	
 
@@ -33,7 +33,7 @@ public class ProductionLine implements Runnable{
 				readyAircraft.print();
 				
 				System.out.println("Sending Aircraft: "+readyAircraft.getAircraftId()+" into ProductionLine");
-				InProduction.add(readyAircraft);
+				InProduction.PutIntoProductionList(readyAircraft);
 				
 				System.out.println();
 

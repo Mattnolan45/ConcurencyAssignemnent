@@ -16,8 +16,8 @@ public class Main{
     Thread productionLine = new Thread( new ProductionLine(10, waitingList) );
     productionLine.start();
 
-    System.out.println("AircraftControllor Start");
-    Thread controllor = new Thread( new AircraftControllor(waitingList) );
+    System.out.println("AircraftController Start");
+    Thread controllor = new Thread( new AircraftController(waitingList) );
     controllor.start();
 
 

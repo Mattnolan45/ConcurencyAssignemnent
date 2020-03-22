@@ -3,12 +3,12 @@ package Ca4006;
 import java.util.*;  
 import Ca4006.*;
 
-public class AircraftControllor implements Runnable {
+public class AircraftController implements Runnable {
 	private Queue<Aircraft> AircraftsWaitingForParts;
 	private Storage PartStorage;
 	private AircraftWaitingList WaitingProduction;
 	
-	public AircraftControllor(AircraftWaitingList waitingProduction){
+	public AircraftController(AircraftWaitingList waitingProduction){
 
 		this.AircraftsWaitingForParts = new LinkedList<Aircraft>();
 		this.PartStorage = new Storage();
@@ -29,12 +29,12 @@ public class AircraftControllor implements Runnable {
 	@Override
 	public void run(){
 		int aircraftCount = 0;
-		while(aircraftCount < 5 ){//|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
+		while(aircraftCount < 5 ){ //|| !AircraftsWaitingForParts.isEmpty()){ // sync block wait/notify with check parts
 			System.out.println("producing aircraft Number: " + aircraftCount);
 			if(aircraftCount < 5 ){
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
 				WaitingProduction.PutIntoProduction(arrivedAircraft);
-				System.out.println("AircraftControllor Sleep");
+				System.out.println("AircraftController Sleep");
 				try{
 				Thread.sleep(2000);
 				}catch(Exception e){
@@ -43,7 +43,7 @@ public class AircraftControllor implements Runnable {
 			}
 			aircraftCount++;
 		}
-		System.out.println("AircraftControllor closed");
+		System.out.println("AircraftController closed");
 
 	}
 

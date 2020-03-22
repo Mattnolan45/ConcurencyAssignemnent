@@ -9,7 +9,7 @@ public class Robot implements Runnable {
 	private Integer RobotID;
 	private Queue<Part> CurrentWorkPlan;
 
-	public Robot(Integer id, Part part ){
+	public Robot(Integer id, Queue<Part> part ){
 		this.RobotID = id;
 		this.CurrentWorkPlan = new LinkedList<Part>();
 	}

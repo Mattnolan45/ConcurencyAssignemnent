@@ -21,7 +21,7 @@ public class InProductionList{
 		return InProductionList.poll();
 	}
 
-	public synchronized void PutIntoProduction(Aircraft aircraft){
+	public synchronized void PutIntoProductionList(Aircraft aircraft){
 		try{
 			InProductionList.add(aircraft);
 			notify();
