@@ -16,7 +16,6 @@ public class ProductionLine implements Runnable{
 	}
 
 	public void CheckForSpaceInProductionLine(){
-		System.out.println("Production size: "+InProduction.size());
 		if(InProduction.size() <= 3){
 				
 				Aircraft readyAircraft = WaitingProduction.GetFromAircraftContollor(); 

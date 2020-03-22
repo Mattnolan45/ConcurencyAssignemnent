@@ -34,9 +34,6 @@ public class AircraftController implements Runnable {
 				Aircraft arrivedAircraft = GenerateAircraft(aircraftCount); //  make new aircraft
 				WaitingProduction.PutIntoProduction(arrivedAircraft); // put into shared waiting production list
 				
-				System.out.println("AircraftController Sleep");
-				System.out.println();
-				
 				try{
 					Thread.sleep(2000);
 				}catch(Exception e){

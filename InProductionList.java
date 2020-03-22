@@ -30,8 +30,6 @@ public class InProductionList{
 		}	
 	}
 
-	
-
 
 	public void RemoveFromProductionList(int aircraftid){
 		InProductionList.poll();

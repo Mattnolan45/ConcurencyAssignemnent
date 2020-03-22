@@ -39,6 +39,7 @@ public class RobotController implements Runnable{
 
 		ThreadPool.execute(robot); 
 
+		waitingRobots.add(robot);
 	}
 
 
